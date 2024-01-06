@@ -1,0 +1,106 @@
+bilet_zero = [[['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+              ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+              ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']],
+              [['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+              ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+              ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']]]
+
+def start(bilet_zero):
+    bilet_full = []
+    num=int(input("Введите кол-во билетов:"))
+    for t in range(num):
+        bilet_full.append(bilet_zero)
+    print("Вводите по строчно чифры:")
+    for i in bilet_full:
+        for ii in i:
+            for iii in ii:
+                for u in range(5):
+                    number = int(input())
+                    if 0 < number < 10:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][0] = number
+                    elif 10 <= number < 20:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][1] = number
+                    elif 20 <= number < 30:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][2] = number
+                    elif 30 <= number < 40:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][3] = number
+                    elif 40 <= number < 50:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][4] = number
+                    elif 50 <= number < 60:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][5] = number
+                    elif 60 <= number < 70:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][6] = number
+                    elif 70 <= number < 80:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][7] = number
+                    elif 80 <= number < 90:
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][8] = number
+        for u in i:
+            for uu in u:
+                print(uu)
+    return bilet_full, num
+
+def dellit(num,bilet_full):
+    for i in bilet_full:
+        for ii in i:
+            for iii in ii:
+                if num in bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)]:
+                    bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][iii.index("*")]="@"
+    return bilet_full
+
+def check(bilet_full):
+    for i in bilet_full:
+        for ii in i:
+            for iii in ii:
+                if iii.count("@")==5:
+                    for j in bilet_full[bilet_full.index(i)]:
+                        for jj in j:
+                            print(jj)
+                    for u in range(5):
+                        bilet_full[bilet_full.index(i)][i.index(ii)][ii.index(iii)][iii.index("@")]="#"
+                    print("Строка!")
+    for i in bilet_full:
+        for ii in i:
+            count = 0
+            for iii in ii:
+                if iii.count("#")==5:
+                    count+=5
+            if count == 15:
+                for j in bilet_full[bilet_full.index(i)]:
+                    for jj in j:
+                        print(jj)
+                for u in range(3):
+                    for uu in range(5):
+                        bilet_full[bilet_full.index(i)][i.index(ii)][u][iii.index("#")] = "%"
+                print("Ечейка!")
+    for i in bilet_full:
+        count_2 = 0
+        for ii in i:
+            count = 0
+            for iii in ii:
+                if iii.count("@")==5:
+                    count+=5
+            if count == 15:
+                count_2 +=15
+        if count_2 == 30:
+            for j in bilet_full[bilet_full.index(i)]:
+                for jj in j:
+                    print(jj)
+                for u in range(2):
+                    for uu in range(3):
+                        for uuu in range(5):
+                            bilet_full[bilet_full.index(i)][u][uu][iii.index("%")] = "&"
+            print("Билет!")
+    return bilet_full
+
+class bilet():
+    def __init__(self,num):
+        self.index = []
+        for i in range(1,num+1):
+            self.index.append(int(input(f"Номер {i} биллета:")))
+
+bilet_full, num = start(bilet_zero)
+bilet_full_rezerv = bilet_full.copy()
+bilet_full_clas = bilet_full.copy()
+bilet_full_clas = bilet(num)
+while True:
+    bilet_full = check(dellit(int(input()),bilet_full_rezerv))
