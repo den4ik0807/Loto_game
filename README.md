@@ -1,2 +1,3 @@
 # Loto_game
-Helps to win $ 1000000000 !
+This code allows a user with a large number of tickets to control the winnings.
+P.S. It is sharpened for the "Russian lotto"
